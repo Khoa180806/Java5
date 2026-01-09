@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Form with Parameters</title>
+</head>
+<body>
+    <form action="/param/save/2031" method="post">
+        <input name="x" value="2021">
+        <button>Save</button>
+    </form>
+    <ul>
+        <li>Value of x: <span th:text="${x}"></span></li>
+        <li>Value of y: <span th:text="${y}"></span></li>
+    </ul>
+</body>
+</html>
