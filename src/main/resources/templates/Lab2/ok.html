@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lab2 - Controller</title>
+</head>
+<body>
+    <form th:action="@{/ctrl/ok}" method="post">
+        <button name="ok1" type="submit">OK 1</button>
+        <button formmethod="get" type="submit">OK 2</button>
+        <button formaction="/ctrl/ok?x" type="submit">OK 3</button>
+    </form>
+    <p>Kết quả: <span th:text="${methodName}">?</span></p>
+</body>
+</html>
