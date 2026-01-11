@@ -1,4 +1,4 @@
-package com.java4.study.Lab3;
+package com.java4.study.Lab3.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
