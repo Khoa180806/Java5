@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <article th:fragment="about">
-    <h1>Giới thiệu</h1>
+    <h1 th:text="#{about.title}">Giới thiệu</h1>
     <ul>
-        <li><h3>FPT Polytechnic</h3></li>
-        <li><h3>Thực học - Thực nghiệp</h3></li>
+        <li><h3 th:text="#{about.fpt}">FPT Polytechnic</h3></li>
+        <li><h3 th:text="#{about.motto}">Thực học - Thực nghiệp</h3></li>
     </ul>
 </article>
 </body>

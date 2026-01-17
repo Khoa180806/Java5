@@ -6,7 +6,8 @@
 </head>
 <body>
 <header>
-    <h1>Online Shopping</h1>
+    <h1 th:text="#{header.name}">Online Shopping</h1>
+    <p th:text="#{header.welcome}">Welcome to our website</p>
 </header>
 
 <nav th:replace="~{/Lab4/menu :: menu}">
@@ -22,7 +23,7 @@
 
 <footer>
     <hr>
-    <p>&copy; 2024 by FPT Polytechnic. All rights reserved.</p>
+    <p th:text="#{footer.copyright}">© 2024 by FPT Polytechnic. All rights reserved.</p>
 </footer>
 </body>
 </html>
