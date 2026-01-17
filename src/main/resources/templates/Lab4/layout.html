@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Default Title</title>
+</head>
+<body>
+<header>
+    <h1>Online Shopping</h1>
+</header>
+
+<nav th:replace="~{/Lab4/menu :: menu}">
+    <!-- Menu will be inserted here -->
+</nav>
+
+<main th:if="${content} == 'home'">
+    <div th:replace="~{/Lab4/home :: home}"></div>
+</main>
+<main th:if="${content} == 'about'">
+    <div th:replace="~{/Lab4/about :: about}"></div>
+</main>
+
+<footer>
+    <hr>
+    <p>&copy; 2024 by FPT Polytechnic. All rights reserved.</p>
+</footer>
+</body>
+</html>
