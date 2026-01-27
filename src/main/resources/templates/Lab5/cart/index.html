@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Giỏ hàng</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .back-link { background-color: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; }
+        .clear-btn { background-color: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; }
+        .cart-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .cart-table th, .cart-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        .cart-table th { background-color: #f8f9fa; }
+        .quantity-input { width: 60px; padding: 5px; text-align: center; }
+        .btn { padding: 5px 10px; text-decoration: none; border-radius: 4px; margin: 0 2px; }
+        .btn-remove { background-color: #dc3545; color: white; }
+        .btn-update { background-color: #007bff; color: white; }
+        .summary { text-align: right; margin: 20px 0; }
+        .summary-item { margin: 5px 0; }
+        .total { font-size: 18px; font-weight: bold; color: #28a745; }
+        .empty-cart { text-align: center; padding: 40px; color: #6c757d; }
+        .message { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Giỏ hàng của bạn</h1>
+        <div>
+            <a href="/item/index" class="back-link">Tiếp tục mua sắm</a>
+            <a href="/cart/clear" class="clear-btn" onclick="return confirm('Bạn có chắc muốn xóa toàn bộ giỏ hàng?')">Xóa giỏ hàng</a>
+        </div>
+    </div>
+    
+    <!-- Hiển thị thông báo -->
+    <div th:if="${param.message}" class="message success">
+        <span th:text="${param.message}"></span>
+    </div>
+    
+    <div th:if="${items.empty}" class="empty-cart">
+        <h3>Giỏ hàng trống!</h3>
+        <p>Bạn chưa có sản phẩm nào trong giỏ hàng.</p>
+        <a href="/item/index" class="btn" style="background-color: #28a745; color: white; padding: 10px 20px;">Mua sắm ngay</a>
+    </div>
+    
+    <div th:if="${!items.empty}">
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${items}">
+                    <td th:text="${item.id}">ID</td>
+                    <td th:text="${item.name}">Tên sản phẩm</td>
+                    <td th:text="${#numbers.formatDecimal(item.price, 0, 2)} + ' VND'">Giá</td>
+                    <td>
+                        <form th:action="@{/cart/update}" method="post" style="display: inline;">
+                            <input type="hidden" name="id" th:value="${item.id}">
+                            <input type="number" name="qty" th:value="${item.qty}" min="1" class="quantity-input">
+                            <button type="submit" class="btn btn-update">Cập nhật</button>
+                        </form>
+                    </td>
+                    <td th:text="${#numbers.formatDecimal(item.price * item.qty, 0, 2)} + ' VND'">Thành tiền</td>
+                    <td>
+                        <a th:href="@{'/cart/remove/' + ${item.id}}" class="btn btn-remove" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">Xóa</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="summary">
+            <div class="summary-item">
+                <strong>Tổng số lượng:</strong> <span th:text="${count}">0</span> sản phẩm
+            </div>
+            <div class="summary-item total">
+                <strong>Tổng tiền:</strong> <span th:text="${#numbers.formatDecimal(amount, 0, 2)} + ' VND'">0 VND</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
