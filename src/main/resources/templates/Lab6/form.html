@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="form">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+                <span th:if="${category.id == null}">Thêm mới loại hàng</span>
+                <span th:if="${category.id != null}">Cập nhật loại hàng</span>
+            </h5>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/category/save}" th:object="${category}" method="post">
+                <input type="hidden" th:field="*{id}">
+                
+                <div class="mb-3">
+                    <label class="form-label">Tên loại hàng</label>
+                    <input type="text" class="form-control" th:field="*{name}" required>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">
+                        <span th:if="${category.id == null}">Thêm mới</span>
+                        <span th:if="${category.id != null}">Cập nhật</span>
+                    </button>
+                    <a th:href="@{/category/index}" class="btn btn-secondary">Làm mới</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

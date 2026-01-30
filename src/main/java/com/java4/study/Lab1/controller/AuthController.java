@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/auth")
 public class AuthController {
     
     @Autowired
@@ -25,8 +25,9 @@ public class AuthController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
-        // Kiểm tra thông tin đăng nhập
-        if ("khoa".equals(username) && "123".equals(password)) {
+                        // Kiểm tra thông tin đăng nhập
+        if (("khoa".equals(username) && "123".equals(password)) || 
+            ("admin".equals(username) && "admin".equals(password))) {
             model.addAttribute("message", "Login successful!");
         } else {
             model.addAttribute("message", "Invalid username or password!");
